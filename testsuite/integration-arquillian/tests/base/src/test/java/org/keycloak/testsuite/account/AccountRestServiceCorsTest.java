@@ -120,6 +120,14 @@ public class AccountRestServiceCorsTest extends AbstractTestRealmKeycloakTest {
     }
 
     @Test
+    public void testUnauthorizedResponse() {
+        driver.navigate().to(VALID_CORS_URL);
+
+        Result result = doXhr(executor, getAccountUrl(), "invalid-token", null, true);
+        assertEquals(401, result.getStatus());
+    }
+
+    @Test
     public void testGetVersionedApi() {
         driver.navigate().to(VALID_CORS_URL);
 
